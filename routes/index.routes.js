@@ -45,5 +45,7 @@ module.exports = app => {
     //Recuperar todo
     router.get('/usuariost', usuario.findAll);//http://localhost:9595/algoticket/usuariost/
 
+
+    
     app.use('/algoticket', router);
 }

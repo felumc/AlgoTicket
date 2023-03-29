@@ -6,13 +6,19 @@ module.exports = (sequelize, Sequelize) => {
         fecha: {
             type: Sequelize.DATEONLY
         },
-        entidad_federativa: {
+        artista: {
             type: Sequelize.STRING
         },
-        ciudad: {
+        organizador: {
             type: Sequelize.STRING
         },
-        cantidad_boletos: {
+        descripcion: {
+            type: Sequelize.STRING
+        },
+        restricciones: {
+            type: Sequelize.STRING
+        },
+        id_lugar: {
             type: Sequelize.INTEGER
         }
     });

@@ -1,13 +1,16 @@
 module.exports = (sequelize, Sequelize) => {
     const Boleto = sequelize.define("boleto", {
-        id_evento: {
+        id_seccion: {
             type: Sequelize.INTEGER
         },
-        tipo_boleto: {
-            type: Sequelize.STRING
+        id_asiento: {
+            type: Sequelize.INTEGER
         },
-        precio: {
-            type: Sequelize.FLOAT
+        id_usuario: {
+            type: Sequelize.INTEGER
+        },
+        estatus: {
+            type: Sequelize.INTEGER
         }
     });
 
