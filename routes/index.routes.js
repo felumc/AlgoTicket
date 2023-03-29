@@ -101,10 +101,33 @@ module.exports = app => {
     // Eliminar todos las eventos de la base de datos
     router.delete("/eventoALL", evento.deleteAll); //http://localhost:9595/algoticket/eventoALL/
 
-    
-    
+    //Rutas para asiento
 
+    const asiento = require("../controllers/asiento.controller.js");
 
+    // Crear un nuevo asiento
+    router.post("/asiento", asiento.create); //http://localhost:9595/algoticket/asiento
+
+    // Crear muchos asientos
+    router.post("/asientos_bulk", asiento.bulkCreate); //http://localhost:9595/algoticket/asientos_bulk
+    
+    // Recuperar todos los asientos
+    router.get("/asientos", asiento.findAll); //http://localhost:9595/algoticket/asientos/
+
+    // Encontrar asiento por id
+    router.get("/asiento/:id", asiento.findOne); //http://localhost:9595/algoticket/asiento/[id]
+
+    // Actualizar asiento por id
+    router.put("/asiento/:id", asiento.update); //http://localhost:9595/algoticket/asiento/[id]
+
+    // Encontrar asiento por fila
+    router.get("/asiento_f/:fila", asiento.findByFila); //http://localhost:9595/algoticket/asiento_f/[fila]
+
+    // Eliminar un asiento por id
+    router.delete("/asiento/:id", asiento.delete); //http://localhost:9595/algoticket/asiento/[id]
+
+    // Eliminar todos los asientos de la base de datos
+    router.delete("/asientosALL", asiento.deleteAll); //http://localhost:9595/algoticket/asientosALL/
 
     app.use('/algoticket', router);
 
