@@ -8,7 +8,7 @@ module.exports = app => {
     */
     const rol = require("../controllers/rol.controller.js");
     // Crear un nuevo usuario 
-    router.post("/rol/crear", rol.create); //http://localhost:9595/algoticket/crear
+    router.post("/rol/crear", rol.create); //http://localhost:9595/usuario/crear
     /* router.get("/usuarios", usuario.findAll); //http://localhost:9595/usuarios
     router.get("/usuario/:id", usuario.findOne); //http://localhost:9595/usuario/:id
     router.get("/todo/:id", usuario.todo); //http://localhost:9595/todo/:id
@@ -78,6 +78,35 @@ module.exports = app => {
     router.delete("/seccionesALL", seccion.deleteAll); //http://localhost:9595/algoticket/seccionesALL/
 
 
+    const evento = require("../controllers/evento.controller.js");
+
+    // Crear una nueva evento 
+    router.post("/evento", evento.create); //http://localhost:9595/algoticket/evento
+
+    // Crear muchos evento
+    router.post("/evento_bulk", evento.bulkCreate); //http://localhost:9595/algoticket/eventos_bulk
+
+    // Recuperar todos las usuarios
+    router.get("/eventos", evento.findAll); //http://localhost:9595/algoticket/eventos/
+
+    // Encontrar evento por id
+    router.get("/evento/:id", evento.findOne); //http://localhost:9595/algoticket/evento/[id]
+
+    // Actualizar evento por id
+    router.put("/evento/:id", evento.update); //http://localhost:9595/algoticket/evento/[id]
+
+    // Eliminar un evento por id
+    router.delete("/evento/:id", evento.delete); //http://localhost:9595/algoticket/evento/[id]
+
+    // Eliminar todos las eventos de la base de datos
+    router.delete("/eventoALL", evento.deleteAll); //http://localhost:9595/algoticket/eventoALL/
+
     
+    
+
+
+
     app.use('/algoticket', router);
+
+
 }
