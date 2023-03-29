@@ -161,7 +161,6 @@ module.exports = app => {
     // Eliminar todos las lugares de la base de datos
     router.delete("/lugaresALL", lugar.deleteAll); //http://localhost:9595/algoticket/lugaresALL/
 
-    
     app.use('/algoticket', router);
 
 
