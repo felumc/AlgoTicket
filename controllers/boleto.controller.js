@@ -1,5 +1,8 @@
 const db = require("../models");
 const Boleto = db.boleto;
+const Evento = db.evento;
+const Seccion = db.seccion;
+
 
 // Crear y Guardar un nuevo Boleto
 exports.create = (req, res) => {
@@ -35,6 +38,89 @@ exports.create = (req, res) => {
       });
     });
 };
+
+/*Modelo de seccion
+module.exports = (sequelize, Sequelize) => {
+    const Seccion = sequelize.define("seccion", {
+        tipo_boleto: {
+            type: Sequelize.STRING
+        },
+        precio: {
+            type: Sequelize.FLOAT
+        },
+        rango_asientos: {
+            type: Sequelize.ARRAY(Sequelize.INTEGER)
+        },
+        eventoId: {
+            type: Sequelize.INTEGER
+        }
+    });
+
+    return Seccion;
+};
+*/
+/*Modelo de evento
+module.exports = (sequelize, Sequelize) => {
+    const Evento = sequelize.define("evento", {
+        nombre_evento: {
+            type: Sequelize.STRING
+        },
+        fecha: {
+            type: Sequelize.DATEONLY
+        },
+        artista: {
+            type: Sequelize.STRING
+        },
+        organizador: {
+            type: Sequelize.STRING
+        },
+        descripcion: {
+            type: Sequelize.STRING
+        },
+        restricciones: {
+            type: Sequelize.STRING
+        },
+        lugarId: {
+            type: Sequelize.INTEGER
+        }
+    });
+
+    return Evento;
+};
+*/
+//Encontrar un boleto por evento
+exports.findByEvent = (req, res) => {
+  const id = req.params.id;
+
+  Boleto.findAll({
+    where: {
+      eventoId: id,
+    },
+    include: [
+      {
+        model: db.seccion,
+        as: "seccion",
+      },
+      {
+        model: db.asiento,
+        as: "asiento",
+      },
+      {
+        model: db.usuario,
+        as: "usuario",
+      },
+    ],
+  })
+    .then((boleto) => {
+      res.status(200).send(boleto);
+    })
+    .catch((err) => {
+      resres.status(200).send({
+        mensaje: err.message || "Ocurrio un error al el recuperar boleto.",
+      });
+    });
+};
+
 
 // Crear y Guardar muchas Boleto
 exports.bulkCreate = (req, res) => {
