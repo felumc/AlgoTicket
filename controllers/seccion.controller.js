@@ -36,7 +36,7 @@ exports.bulkCreate = (req, res) => {
   // Crear un Seccion
   const seccion = req.body;
 
-  // Guardar Usuario en la base de datos
+  // Guardar Seccion en la base de datos
   Seccion.bulkCreate(seccion)
     .then((seccion) => {
       res.status(200).send(seccion);
