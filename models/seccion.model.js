@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => {
         rango_asientos: {
             type: Sequelize.ARRAY(Sequelize.INTEGER)
         },
-        id_evento: {
+        eventoId: {
             type: Sequelize.INTEGER
         }
     });

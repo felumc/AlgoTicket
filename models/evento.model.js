@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize) => {
         restricciones: {
             type: Sequelize.STRING
         },
-        id_lugar: {
+        lugarId: {
             type: Sequelize.INTEGER
         }
     });

@@ -15,7 +15,9 @@ module.exports = app => {
     router.put("/usuario/:id", usuario.update); //http://localhost:9595/usuario/:id
     router.delete("/usuario/:id", usuario.delete); //http://localhost:9595/usuario/:id */
 
-    /*Rutas para usuario*/
+    /*
+    * Rutas para usuario
+    */
     const usuario = require("../controllers/usuario.controller.js");
 
     // Crear una nueva usuario 
@@ -44,6 +46,36 @@ module.exports = app => {
 
     //Recuperar todo
     router.get('/usuariost', usuario.findAll);//http://localhost:9595/algoticket/usuariost/
+
+
+    /*
+    * Rutas para seccion
+    */
+    const seccion = require("../controllers/seccion.controller.js");
+
+    // Crear una nueva seccion 
+    router.post("/seccion", seccion.create); //http://localhost:9595/algoticket/seccion
+
+    // Crear muchos secciones
+    router.post("/secciones_bulk", seccion.bulkCreate); //http://localhost:9595/algoticket/secciones_bulk
+
+    // Recuperar todos las secciones
+    router.get("/secciones", seccion.findAll); //http://localhost:9595/algoticket/secciones/
+
+    // Encontrar seccion por id
+    router.get("/seccion/:id", seccion.findOne); //http://localhost:9595/algoticket/seccion/[id]
+
+    // Encontrar seccion por tipo
+    //router.get("/seccion_t/:tipo", seccion.findByTipo); //http://localhost:9595/algoticket/seccion_t/[tipo]
+
+    // Actualizar seccion por id
+    router.put("/seccion/:id", seccion.update); //http://localhost:9595/algoticket/seccion/[id]
+
+    // Eliminar un seccion por id
+    router.delete("/seccion/:id", seccion.delete); //http://localhost:9595/algoticket/seccion/[id]
+
+    // Eliminar todos las secciones de la base de datos
+    router.delete("/seccionesALL", seccion.deleteAll); //http://localhost:9595/algoticket/seccionesALL/
 
 
     

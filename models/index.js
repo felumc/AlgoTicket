@@ -48,45 +48,45 @@ db.usuario.belongsTo(db.rol, {
 
 // -------------- Tabla usuario
 db.usuario.hasMany(db.boleto, {
-    foreingKey: "id_usuario",
+    foreingKey: "usuarioId",
 });
 
 db.boleto.belongsTo(db.usuario, {
-    foreingKey: "id_usuario",
+    foreingKey: "usuarioId",
 })
 
 // -------------- Tabla Lugar
 db.lugar.hasMany(db.evento, {
-    foreingKey: "id_lugar",
+    foreingKey: "lugarId",
 });
 
 db.evento.belongsTo(db.lugar, {
-    foreingKey: "id_lugar",
+    foreingKey: "lugarId",
 });
 
 // -------------- Tabla Evento
 db.evento.hasMany(db.seccion, {
-    foreingKey: "id_evento",
+    foreingKey: "eventoId",
 });
 
 db.seccion.belongsTo(db.evento, {
-    foreingKey: "id_evento",
+    foreingKey: "eventoId",
 });
 
 // -------------- Tabla Seccion
 db.seccion.hasMany(db.boleto, {
-    foreingKey: "id_seccion",
+    foreingKey: "seccionId",
 });
 
 db.boleto.belongsTo(db.seccion, {
-    foreingKey: "id_seccion",
+    foreingKey: "seccionId",
 });
 
 // -------------- Tabla Asiento
 db.asiento.hasMany(db.boleto, {
-    foreingKey: "id_asiento",
+    foreingKey: "asientoId",
 });
 
 db.boleto.belongsTo(db.asiento, {
-    foreingKey: "id_asiento",
+    foreingKey: "asientoId",
 });

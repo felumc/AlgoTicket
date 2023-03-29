@@ -1,12 +1,12 @@
 module.exports = (sequelize, Sequelize) => {
     const Boleto = sequelize.define("boleto", {
-        id_seccion: {
+        seccionId: {
             type: Sequelize.INTEGER
         },
-        id_asiento: {
+        asientoId: {
             type: Sequelize.INTEGER
         },
-        id_usuario: {
+        usuarioId: {
             type: Sequelize.INTEGER
         },
         estatus: {
