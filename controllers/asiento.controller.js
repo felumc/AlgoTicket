@@ -4,9 +4,9 @@ const Asiento = db.asiento;
 // Crear y Guardar un nuevo Asiento
 exports.create = (req, res) => {
   // Validar request
-  if (!req.body.tipo_boleto) {
+  if (!req.body.fila || !req.body.numero_asiento) {
     res.status(400).send({
-      mensaje: "El tipo_boleto no pueda estar vacío ",
+      mensaje: "Asegurese de que los campos esten llenos ",
     });
     return;
   }
@@ -47,14 +47,7 @@ exports.bulkCreate = (req, res) => {
 
 // Recuperar todas las asientos de la base de datos
 exports.findAll = (req, res) => {
-    Asiento.findAll({
-      include: [
-        {
-          model: db.evento,
-          as: "evento",
-        },
-      ],
-    })
+    Asiento.findAll({})
       .then((asiento) => {
         res.status(200).send(asiento);
       })
@@ -69,14 +62,7 @@ exports.findAll = (req, res) => {
 // Encontrar asientos por id
 exports.findOne = (req, res) => {
   const id = req.params.id;
-  Asiento.findByPk(id, {
-    include: [
-      {
-        model: db.evento,
-        as: "evento",
-      },
-    ],
-  })
+  Asiento.findByPk(id, {})
     .then((asiento) => {
       res.status(200).send(asiento);
     })
@@ -91,14 +77,7 @@ exports.findOne = (req, res) => {
 exports.findByTipo = (req, res) => {
   const fila = req.params.fila;
   Asiento.findAll({
-    where: { fila: fila },
-    include: [
-      {
-        model: db.evento,
-        as: "evento",
-      },
-    ],
-  })
+    where: { fila: fila }})
     .then((asiento) => {
       res.status(200).send(asiento);
     })
@@ -138,7 +117,7 @@ exports.delete = (req, res) => {
     .then((num) => {
       if (num == 1) {
         res.status(200).send({
-          mensaje: "Asiento eliminada con exito!",
+          mensaje: "Asiento eliminado con exito!",
         });
       } else {
         res.status(500).send({ mensaje: `Error` });
