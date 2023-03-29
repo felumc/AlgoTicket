@@ -101,7 +101,10 @@ module.exports = app => {
     // Eliminar todos las eventos de la base de datos
     router.delete("/eventoALL", evento.deleteAll); //http://localhost:9595/algoticket/eventoALL/
 
-    //Rutas para asiento
+    
+    /*
+    * Rutas para Asiento
+    */
 
     const asiento = require("../controllers/asiento.controller.js");
 
@@ -129,6 +132,60 @@ module.exports = app => {
     // Eliminar todos los asientos de la base de datos
     router.delete("/asientosALL", asiento.deleteAll); //http://localhost:9595/algoticket/asientosALL/
 
+    /*
+    * Rutas para Evento
+    */
+    const evento = require("../controllers/evento.controller.js");
+
+    // Crear una nueva evento 
+    router.post("/evento", evento.create); //http://localhost:9595/algoticket/evento
+
+    // Crear muchos evento
+    router.post("/evento_bulk", evento.bulkCreate); //http://localhost:9595/algoticket/eventos_bulk
+
+    // Recuperar todos las usuarios
+    router.get("/eventos", evento.findAll); //http://localhost:9595/algoticket/eventos/
+
+    // Encontrar evento por id
+    router.get("/evento/:id", evento.findOne); //http://localhost:9595/algoticket/evento/[id]
+
+    // Actualizar evento por id
+    router.put("/evento/:id", evento.update); //http://localhost:9595/algoticket/evento/[id]
+
+    // Eliminar un evento por id
+    router.delete("/evento/:id", evento.delete); //http://localhost:9595/algoticket/evento/[id]
+
+    // Eliminar todos las eventos de la base de datos
+    router.delete("/eventoALL", evento.deleteAll); //http://localhost:9595/algoticket/eventoALL/
+
+
+     /*
+    * Rutas para lugar
+    */
+    const lugar = require("../controllers/lugar.controller.js");
+
+    // Crear una nueva lugar 
+    router.post("/lugar", lugar.create); //http://localhost:9595/algoticket/lugar
+
+    // Crear muchos lugares
+    router.post("/lugares_bulk", lugar.bulkCreate); //http://localhost:9595/algoticket/lugares_bulk
+
+    // Recuperar todos las lugares
+    router.get("/lugares", lugar.findAll); //http://localhost:9595/algoticket/lugares/
+
+    // Encontrar lugar por id
+    router.get("/lugar/:id", lugar.findOne); //http://localhost:9595/algoticket/lugar/[id]
+
+    // Actualizar lugar por id
+    router.put("/lugar/:id", lugar.update); //http://localhost:9595/algoticket/lugar/[id]
+
+    // Eliminar un lugar por id
+    router.delete("/lugar/:id", lugar.delete); //http://localhost:9595/algoticket/lugar/[id]
+
+    // Eliminar todos las lugares de la base de datos
+    router.delete("/lugaresALL", lugar.deleteAll); //http://localhost:9595/algoticket/lugaresALL/
+
+    
     app.use('/algoticket', router);
 
 
