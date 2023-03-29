@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'algotickets'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BAA710CDF667450F8002A5BB4405F1A1 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B11D58C67BF9456BAADACB02A28FAEC0 }}
           package: .
