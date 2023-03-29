@@ -78,6 +78,9 @@ module.exports = app => {
     router.delete("/seccionesALL", seccion.deleteAll); //http://localhost:9595/algoticket/seccionesALL/
 
 
+    /*
+    * Rutas para Evento
+    */
     const evento = require("../controllers/evento.controller.js");
 
     // Crear una nueva evento 
@@ -131,33 +134,6 @@ module.exports = app => {
 
     // Eliminar todos los asientos de la base de datos
     router.delete("/asientosALL", asiento.deleteAll); //http://localhost:9595/algoticket/asientosALL/
-
-    /*
-    * Rutas para Evento
-    */
-    const evento = require("../controllers/evento.controller.js");
-
-    // Crear una nueva evento 
-    router.post("/evento", evento.create); //http://localhost:9595/algoticket/evento
-
-    // Crear muchos evento
-    router.post("/evento_bulk", evento.bulkCreate); //http://localhost:9595/algoticket/eventos_bulk
-
-    // Recuperar todos las usuarios
-    router.get("/eventos", evento.findAll); //http://localhost:9595/algoticket/eventos/
-
-    // Encontrar evento por id
-    router.get("/evento/:id", evento.findOne); //http://localhost:9595/algoticket/evento/[id]
-
-    // Actualizar evento por id
-    router.put("/evento/:id", evento.update); //http://localhost:9595/algoticket/evento/[id]
-
-    // Eliminar un evento por id
-    router.delete("/evento/:id", evento.delete); //http://localhost:9595/algoticket/evento/[id]
-
-    // Eliminar todos las eventos de la base de datos
-    router.delete("/eventoALL", evento.deleteAll); //http://localhost:9595/algoticket/eventoALL/
-
 
      /*
     * Rutas para lugar
