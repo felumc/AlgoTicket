@@ -127,7 +127,7 @@ module.exports = app => {
     router.put("/asiento/:id", asiento.update); //http://localhost:9595/algoticket/asiento/[id]
 
     // Encontrar asiento por fila
-    router.get("/asiento_f/:fila", asiento.findByFila); //http://localhost:9595/algoticket/asiento_f/[fila]
+    router.get("/asiento_f/:fila", asiento.findByTipo); //http://localhost:9595/algoticket/asiento_f/[fila]
 
     // Eliminar un asiento por id
     router.delete("/asiento/:id", asiento.delete); //http://localhost:9595/algoticket/asiento/[id]
