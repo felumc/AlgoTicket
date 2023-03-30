@@ -26,3 +26,14 @@ exports.create = (req, res) => {
       res.status(500).send({mensaje: "Error al crear Rol"});
     });
 };
+
+//Funcion encontrar todos
+exports.findAll = (req, res) => {
+    Rol.findAll()
+    .then(Rol => {
+      res.status(200).send(Rol);
+    })
+    .catch(err => {
+      res.status(500).send({mensaje: "Error al recuperar Rol"});
+    });
+}

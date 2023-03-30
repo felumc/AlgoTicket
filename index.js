@@ -2,11 +2,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 
-// realizar parse de content-type - application/json de requests
-app.use(bodyParser.json());
-// realizar parse de content-type - application/x-www-form-urlencoded de requests
-app.use(bodyParser.urlencoded({ extended: true }));
-//habilitar el cors
+// Middlewares
+app.use(bodyParser.json()); // parse requests of content-type - application/json
+app.use(bodyParser.urlencoded({ extended: true })); // parse requests of content-type - application/x-www-form-urlencoded
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -19,23 +17,30 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// route raiz
+
+// Bienvenida a la API
 app.get("/", (req, res) => {
-  res.json({
-    message:
-      "Bienvenido a la aplicacion AlgoTicket.",
-  });
+  res.send("Bienvenido a la API de AlgoTicket");
 });
 
+// Sequelize
 const db = require("./models");
 db.sequelize.sync({ force: false }).then(() => {
-  console.log("Eliminar y sincronizar db");
-});
-
-require("./routes/index.routes")(app);
-
-// asignar port para escuchar requests
-const PORT = process.env.PORT || 9595;
-app.listen(PORT, () => {
+  console.log("====================================\n"); 
+  console.log("Host de servidor:", db.sequelize.config.host); 
   console.log(`Server esta ejecutandose en puerto ${PORT}.`);
 });
+
+// Rutas
+//require("./routes/index.routes")(app);
+app.use('/algoticket/rol', require('./routes/rol.routes'));
+app.use('/algoticket/usuario', require('./routes/usuario.routes'));
+app.use('/algoticket/seccion', require('./routes/seccion.routes'));
+app.use('/algoticket/evento', require('./routes/evento.routes'));
+app.use('/algoticket/lugar', require('./routes/lugar.routes'));
+app.use('/algoticket/asiento', require('./routes/asiento.routes'));
+app.use('/algoticket/boleto', require('./routes/boleto.routes'));
+
+// Puerto de la API (localhost:9595) 
+const PORT = process.env.PORT || 9595;
+app.listen(PORT);
