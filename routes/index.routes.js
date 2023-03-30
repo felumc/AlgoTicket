@@ -183,6 +183,9 @@ module.exports = app => {
     // Encontrar boletos por evento
     router.get("/boleto_e/:id", boleto.findByEvent); //http://localhost:9595/algoticket/boleto_e/[id]
 
+    // Encontrar boletos por usuario
+    router.get("/boleto_u/:id", boleto.findBoletosUsuario); //http://localhost:9595/algoticket/boleto_u/[id]
+
     // Actualizar boleto por id
     router.put("/boleto/:id", boleto.update); //http://localhost:9595/algoticket/boleto/[id]
 

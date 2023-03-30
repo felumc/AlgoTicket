@@ -42,55 +42,6 @@ exports.create = (req, res) => {
     });
 };
 
-/*Modelo de seccion
-module.exports = (sequelize, Sequelize) => {
-    const Seccion = sequelize.define("seccion", {
-        tipo_boleto: {
-            type: Sequelize.STRING
-        },
-        precio: {
-            type: Sequelize.FLOAT
-        },
-        rango_asientos: {
-            type: Sequelize.ARRAY(Sequelize.INTEGER)
-        },
-        eventoId: {
-            type: Sequelize.INTEGER
-        }
-    });
-
-    return Seccion;
-};
-*/
-/*Modelo de evento
-module.exports = (sequelize, Sequelize) => {
-    const Evento = sequelize.define("evento", {
-        nombre_evento: {
-            type: Sequelize.STRING
-        },
-        fecha: {
-            type: Sequelize.DATEONLY
-        },
-        artista: {
-            type: Sequelize.STRING
-        },
-        organizador: {
-            type: Sequelize.STRING
-        },
-        descripcion: {
-            type: Sequelize.STRING
-        },
-        restricciones: {
-            type: Sequelize.STRING
-        },
-        lugarId: {
-            type: Sequelize.INTEGER
-        }
-    });
-
-    return Evento;
-};
-*/
 exports.findByEvent = async (req, res) => {
   try {
     const id = req.params.id;
@@ -121,6 +72,23 @@ exports.findByEvent = async (req, res) => {
   }
 };
 
+// Recuperar boletos por usuario
+exports.findBoletosUsuario = (req, res) => {
+  const iduser = req.params.id;
+
+  Boleto.findAll({
+    where: {usuarioId: iduser}
+  })
+    .then((boleto) => {
+      res.status(200).send(boleto);
+    })
+    .catch((err) => {
+      res.status(200).send({
+        mensaje: err.message || "Ocurrio un error al recuperar boletos.",
+      });
+    });
+
+}
 
 
 

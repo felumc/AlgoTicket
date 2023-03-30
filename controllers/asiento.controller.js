@@ -88,6 +88,7 @@ exports.findByTipo = (req, res) => {
     });
 };
 
+
 // Actualizar Asiento por id
 exports.update = (req, res) => {
   const id = req.params.id;

@@ -54,7 +54,7 @@ exports.bulkCreate = (req, res) => {
 // Recuperar todas las secciones de la base de datos
 exports.findAll = (req, res) => {
   Evento.findAll({
-      })
+  })
     .then((evento) => {
       res.status(200).send(evento);
     })
@@ -70,7 +70,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
   Evento.findByPk(id, {
-    
+
   })
     .then((evento) => {
       res.status(200).send(evento);
@@ -82,80 +82,58 @@ exports.findOne = (req, res) => {
     });
 };
 
-// Encontrar por nombre_evento
-exports.findByTipo = (req, res) => {
-  const tipo = req.params.nombre_evento;
-  Evento.findAll({
-    where: { nombre_evento: tipo },
-    include: [
-      {
-        model: db.evento,
-        as: "evento",
-      },
-    ],
-  })
-    .then((evento) => {
-      res.status(200).send(evento);
+  // Actualizar Evento por id
+  exports.update = (req, res) => {
+    const id = req.params.id;
+    Evento.update(req.body, {
+      where: { id: id },
     })
-    .catch((err) => {
-      res.status(500).send({
-        mensaje: "Error al recuperar Evento por tipo= " + tipo,
+      .then((num) => {
+        if (num == 1) {
+          res.status(200).send({
+            mensaje: "Evento se actualizo con exito.",
+          });
+        } else {
+          res.status(500).send({ mensaje: `Error` });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({ mensaje: `Error` });
       });
-    });
-};
+  };
 
-// Actualizar Evento por id
-exports.update = (req, res) => {
-  const id = req.params.id;
-  Evento.update(req.body, {
-    where: { id: id },
-  })
-    .then((num) => {
-      if (num == 1) {
-        res.status(200).send({
-          mensaje: "Evento se actualizo con exito.",
-        });
-      } else {
+  // Eliminar un Evento por id
+  exports.delete = (req, res) => {
+    const id = req.params.id;
+    Evento.destroy({
+      where: { id: id },
+    })
+      .then((num) => {
+        if (num == 1) {
+          res.status(200).send({
+            mensaje: "Evento eliminada con exito!",
+          });
+        } else {
+          res.status(500).send({ mensaje: `Error` });
+        }
+      })
+      .catch((err) => {
         res.status(500).send({ mensaje: `Error` });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({ mensaje: `Error` });
-    });
-};
+      });
+  };
 
-// Eliminar un Evento por id
-exports.delete = (req, res) => {
-  const id = req.params.id;
-  Evento.destroy({
-    where: { id: id },
-  })
-    .then((num) => {
-      if (num == 1) {
-        res.status(200).send({
-          mensaje: "Evento eliminada con exito!",
-        });
-      } else {
-        res.status(500).send({ mensaje: `Error` });
-      }
+  // Eliminar todos las Eventos de la base de datos
+  exports.deleteAll = (req, res) => {
+    Evento.destroy({
+      where: {},
+      truncate: false,
     })
-    .catch((err) => {
-      res.status(500).send({ mensaje: `Error` });
-    });
-};
-
-// Eliminar todos las Eventos de la base de datos
-exports.deleteAll = (req, res) => {
-  Evento.destroy({
-    where: {},
-    truncate: false,
-  })
-    .then((nums) => {
-      res
-        .status(200)
-        .send({ mensaje: `${nums} secciones fueron eliminados con exito!` });
-    })
-    .catch((err) => {
-      res.status(500).send({ mensaje: `No se pudieron eliminar las secciones` });
-    });
-};
+      .then((nums) => {
+        res
+          .status(200)
+          .send({ mensaje: `${nums} secciones fueron eliminados con exito!` });
+      })
+      .catch((err) => {
+        res.status(500).send({ mensaje: `No se pudieron eliminar las secciones` });
+      });
+  };
