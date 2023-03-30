@@ -163,5 +163,32 @@ module.exports = app => {
 
     app.use('/algoticket', router);
 
+    /*
+    * Rutas para boleto
+    */
+    const boleto = require("../controllers/boleto.controller.js");
 
+    // Crear una nueva boleto 
+    router.post("/boleto", boleto.create); //http://localhost:9595/algoticket/boleto
+
+    // Crear muchos boletoes
+    router.post("/boletoes_bulk", boleto.bulkCreate); //http://localhost:9595/algoticket/boletoes_bulk
+
+    // Recuperar todos las boletoes
+    router.get("/boletoes", boleto.findAll); //http://localhost:9595/algoticket/boletoes/
+
+    // Encontrar boleto por id
+    router.get("/boleto/:id", boleto.findOne); //http://localhost:9595/algoticket/boleto/[id]
+
+    // Encontrar boletos por evento
+    router.get("/boleto_e/:id", boleto.findByEvent); //http://localhost:9595/algoticket/boleto_e/[id]
+
+    // Actualizar boleto por id
+    router.put("/boleto/:id", boleto.update); //http://localhost:9595/algoticket/boleto/[id]
+
+    // Eliminar un boleto por id
+    router.delete("/boleto/:id", boleto.delete); //http://localhost:9595/algoticket/boleto/[id]
+
+    // Eliminar todos las boletoes de la base de datos
+    router.delete("/boletoesALL", boleto.deleteAll); //http://localhost:9595/algoticket/boletoesALL/
 }

@@ -2,6 +2,8 @@ const db = require("../models");
 const Boleto = db.boleto;
 const Evento = db.evento;
 const Seccion = db.seccion;
+const { Op } = require("sequelize");
+
 
 
 // Crear y Guardar un nuevo Boleto
@@ -26,6 +28,7 @@ exports.create = (req, res) => {
     usuarioId: req.body.usuarioId,
     estatus: req.body.estatus,
   };
+
 
   // Guardar Boleto en la base de datos
   Boleto.create(boleto)
@@ -88,38 +91,37 @@ module.exports = (sequelize, Sequelize) => {
     return Evento;
 };
 */
-//Encontrar un boleto por evento
-exports.findByEvent = (req, res) => {
-  const id = req.params.id;
-
-  Boleto.findAll({
-    where: {
-      eventoId: id,
-    },
-    include: [
-      {
-        model: db.seccion,
-        as: "seccion",
+exports.findByEvent = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const secciones = await Seccion.findAll({
+      where: {
+        eventoId: id,
       },
-      {
-        model: db.asiento,
-        as: "asiento",
-      },
-      {
-        model: db.usuario,
-        as: "usuario",
-      },
-    ],
-  })
-    .then((boleto) => {
-      res.status(200).send(boleto);
-    })
-    .catch((err) => {
-      resres.status(200).send({
-        mensaje: err.message || "Ocurrio un error al el recuperar boleto.",
-      });
     });
+    const seccionIds = secciones.map((seccion) => seccion.id);
+    const boletos = await Boleto.findAll({
+      where: {
+        seccionId: {
+          [Op.in]: seccionIds,
+        },
+      },
+      include: [
+        {
+          model: Seccion,
+          as: "seccion",
+        },
+      ],
+    });
+    res.status(200).send(boletos);
+  } catch (err) {
+    res.status(500).send({
+      mensaje: err.message || "Ocurrio un error al recuperar boletos.",
+    });
+  }
 };
+
+
 
 
 // Crear y Guardar muchas Boleto
