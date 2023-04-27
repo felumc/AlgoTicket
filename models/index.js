@@ -1,4 +1,4 @@
-const dbConfig = require("../config/db.config.js");
+const dbConfig = require("../config/db3.config.js");
 const Sequelize = require("sequelize");
 
 //local
@@ -15,10 +15,10 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     },
 
     dialectOptions: {
-        ssl: {
-          require: true,
-          rejectUnauthorized: false
-        }
+        // ssl: {
+        //   require: true,
+        //   rejectUnauthorized: false
+        // }
       }  
 });
 const db = {};

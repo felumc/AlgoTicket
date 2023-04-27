@@ -1,6 +1,15 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
+const cors = require("cors"); 
+const react_web_url = process.env.REACT_WEB_APP;
+
+app.use(
+  cors({
+    origin: react_web_url,
+  })
+);
 
 // Middlewares
 app.use(bodyParser.json()); // parse requests of content-type - application/json
@@ -29,6 +38,8 @@ db.sequelize.sync({ force: false }).then(() => {
   console.log("====================================\n"); 
   console.log("Host de servidor:", db.sequelize.config.host); 
   console.log(`Server esta ejecutandose en puerto ${PORT}.`);
+  console.log(react_web_url);
+
 });
 
 // Rutas
